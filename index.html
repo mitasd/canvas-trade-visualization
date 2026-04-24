@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>China EV Export Flowmap</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="ui">
+  <div id="header">
+    <h1>CHINA EV EXPORT FLOWS</h1>
+    <div class="sub">HS 870380 · Battery Electric Vehicles · 2025</div>
+  </div>
+
+  <div id="stats">
+    <div class="stat-row">
+      <div class="stat-label">Total Export Value</div>
+      <div class="stat-value" id="s-value">—</div>
+    </div>
+    <hr class="divider">
+    <div class="stat-row">
+      <div class="stat-label">Units Exported</div>
+      <div class="stat-value" id="s-qty">—</div>
+    </div>
+    <hr class="divider">
+    <div class="stat-row">
+      <div class="stat-label">Destination Countries</div>
+      <div class="stat-value" id="s-count">73</div>
+    </div>
+  </div>
+
+  <div id="filter-panel" style="position: absolute; top: 250px; right: 24px; background: var(--panel); border: 1px solid rgba(232, 19, 42, 0.3); padding: 16px 20px; backdrop-filter: blur(12px); pointer-events: auto; min-width: 200px;">
+  <div class="stat-label">Min. Export Value Filter</div>
+  <input type="range" id="value-slider" min="0" max="1000000000" step="10000000" value="20000000" style="width: 100%; accent-color: var(--red); margin: 10px 0; cursor: pointer;">
+  <div id="slider-label" style="font-size: 11px; color: #fff; font-family: var(--mono);">$20M</div>
+</div>
+
+  <div id="rankings">
+    <div class="rank-title">Top Importers by Value</div>
+    <div id="rank-list"></div>
+  </div>
+
+  <div id="legend">
+    <div class="legend-title">Flow Thickness = Export Value</div>
+    <div class="legend-row"><div class="legend-line" style="width:60px;height:1px;opacity:0.4"></div><span>$1M – $50M</span></div>
+    <div class="legend-row"><div class="legend-line" style="width:60px;height:2px;opacity:0.6"></div><span>$50M – $500M</span></div>
+    <div class="legend-row"><div class="legend-line" style="width:60px;height:4px"></div><span>$500M – $1B</span></div>
+    <div class="legend-row"><div class="legend-line" style="width:60px;height:7px"></div><span>> $1B</span></div>
+  </div>
+
+  <div id="tooltip">
+    <div class="tt-name" id="tt-name"></div>
+    <div class="tt-val" id="tt-val"></div>
+    <div class="tt-qty" id="tt-qty"></div>
+  </div>
+
+  <div id="source">Source: UN Comtrade · HS 870380 · Compiled Apr 2025</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

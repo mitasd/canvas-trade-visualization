@@ -1,0 +1,140 @@
+ :root {
+      --red: #e8132a;
+      --red-dim: rgba(232, 19, 42, 0.55);
+      --red-glow: rgba(232, 19, 42, 0.18);
+      --gold: #f5c518;
+      --bg: #080b10;
+      --panel: rgba(8, 11, 16, 0.88);
+      --text: #c8cdd6;
+      --mono: 'IBM Plex Mono', monospace;
+      --display: 'Bebas Neue', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; }
+    #map { width: 100vw; height: 100vh; }
+
+    /* Leaflet dark tiles override */
+    .leaflet-tile { filter: brightness(0.38) saturate(0.4) hue-rotate(190deg); }
+    .leaflet-container { background: #080b10; }
+
+    /* UI overlay */
+    #ui {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none; z-index: 1000;
+    }
+
+    /* Header */
+    #header {
+      position: absolute; top: 24px; left: 50%; transform: translateX(-50%);
+      text-align: center; pointer-events: none;
+    }
+    #header h1 {
+      font-family: var(--display);
+      font-size: clamp(28px, 4vw, 52px);
+      letter-spacing: 0.1em;
+      color: #fff;
+      line-height: 1;
+      text-shadow: 0 0 40px var(--red);
+    }
+    #header .sub {
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      color: var(--red);
+      margin-top: 4px;
+      text-transform: uppercase;
+    }
+
+    /* Stats panel */
+    #stats {
+      position: absolute; top: 24px; right: 24px;
+      background: var(--panel);
+      border: 1px solid rgba(232, 19, 42, 0.3);
+      padding: 16px 20px;
+      backdrop-filter: blur(12px);
+      pointer-events: none;
+      min-width: 200px;
+    }
+    .stat-label { font-size: 9px; letter-spacing: 0.2em; color: var(--red); text-transform: uppercase; margin-bottom: 2px; }
+    .stat-value { font-size: 20px; color: #fff; letter-spacing: 0.05em; }
+    .stat-unit { font-size: 9px; color: var(--text); margin-left: 2px; }
+    .stat-row { margin-bottom: 14px; }
+    .stat-row:last-child { margin-bottom: 0; }
+    .divider { border: none; border-top: 1px solid rgba(232, 19, 42, 0.2); margin: 12px 0; }
+
+    /* Legend */
+    #legend {
+      position: absolute; bottom: 40px; left: 24px;
+      background: var(--panel);
+      border: 1px solid rgba(232, 19, 42, 0.3);
+      padding: 14px 18px;
+      backdrop-filter: blur(12px);
+      pointer-events: none;
+    }
+    .legend-title { font-size: 9px; letter-spacing: 0.2em; color: var(--red); text-transform: uppercase; margin-bottom: 12px; }
+    .legend-row { display: flex; align-items: center; gap: 10px; margin-bottom: 7px; font-size: 10px; }
+    .legend-line { height: 2px; border-radius: 1px; background: var(--red); }
+
+    /* Top countries panel */
+    #rankings {
+      position: absolute; bottom: 40px; right: 24px;
+      background: var(--panel);
+      border: 1px solid rgba(232, 19, 42, 0.3);
+      padding: 14px 18px;
+      backdrop-filter: blur(12px);
+      pointer-events: none;
+      min-width: 230px;
+    }
+    .rank-title { font-size: 9px; letter-spacing: 0.2em; color: var(--red); text-transform: uppercase; margin-bottom: 10px; }
+    .rank-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .rank-num { font-size: 9px; color: var(--red); width: 14px; text-align: right; }
+    .rank-bar-wrap { flex: 1; height: 3px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
+    .rank-bar { height: 100%; background: var(--red); border-radius: 2px; }
+    .rank-name { font-size: 10px; color: #ddd; min-width: 90px; }
+    .rank-val { font-size: 9px; color: var(--text); margin-left: auto; }
+
+    /* Tooltip */
+    #tooltip {
+      position: absolute; display: none;
+      background: var(--panel);
+      border: 1px solid rgba(232, 19, 42, 0.5);
+      padding: 10px 14px;
+      backdrop-filter: blur(12px);
+      pointer-events: none;
+      font-size: 11px;
+      max-width: 200px;
+    }
+    #tooltip .tt-name { font-family: var(--display); font-size: 18px; color: #fff; letter-spacing: 0.05em; line-height: 1.1; }
+    #tooltip .tt-val { color: var(--red); font-size: 11px; margin-top: 4px; }
+    #tooltip .tt-qty { color: var(--text); font-size: 10px; margin-top: 2px; }
+
+    /* Source */
+    #source {
+      position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+      font-size: 9px; color: rgba(200,205,214,0.35); letter-spacing: 0.15em;
+      text-transform: uppercase; pointer-events: none;
+    }
+
+    /* Pulse animation for China origin dot */
+    @keyframes pulse-ring {
+      0% { transform: scale(1); opacity: 0.8; }
+      100% { transform: scale(3.5); opacity: 0; }
+    }
+    .origin-pulse {
+      position: relative; display: inline-block;
+      width: 14px; height: 14px;
+    }
+    .origin-pulse::before {
+      content: ''; position: absolute; inset: 0;
+      border-radius: 50%; background: var(--red);
+      animation: pulse-ring 2s ease-out infinite;
+    }
+
+    .canvas-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  fill: rgba(200, 205, 214, 0.8);
+  paint-order: stroke;
+  stroke: var(--bg);
+  stroke-width: 3px;
+  letter-spacing: 0.05em;
+}
