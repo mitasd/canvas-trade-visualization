@@ -40,6 +40,3 @@ The visualization represents export data sourced from the **UN Comtrade** databa
     Simply open `index.html` in any modern web browser. No local server or build process is required as it uses CDN-hosted libraries.
 
 ---
-
-**Author**: Geoinformatics Engineer based in Belgrade.  
-**Academic Context**: Master's research project in Geoinformatics and Digital Signal Processing.
