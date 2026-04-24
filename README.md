@@ -2,6 +2,9 @@
 
 An interactive, high-performance geospatial visualization of global Chinese Electric Vehicle (BEV) export flows for 2025. This project was developed as part of a Geoinformatics research focus, specifically exploring **HTML5 Canvas** rendering for complex spatial datasets.
 
+![Project Demo](assets/demo.gif)
+
+
 ## 🚀 Key Features
 
 * **High-Performance Rendering**: Utilizes the HTML5 Canvas API to ensure smooth, 60fps rendering of flow arcs and animated particles, even with numerous data points.
